@@ -1,24 +1,16 @@
 public class MealBuilder {
-    private String burger;
-    private String drink;
-    private String fries;
-
-    public MealBuilder setBurger(String burger) {
-        this.burger = burger;
-        return this;
+    
+    public Meal prepareVegMeal (){
+        Meal meal = new Meal();
+        meal.addItem(new VegBurger());
+        meal.addItem(new Coke());
+        return meal;
     }
 
-    public MealBuilder setDrink(String drink) {
-        this.drink = drink;
-        return this;
-    }
-
-    public MealBuilder setFries(String fries) {
-        this.fries = fries;
-        return this;
-    }
-
-    public Meal makeMeal() {
-        return new Meal(burger, drink, fries);
+    public Meal prepareNonVegMeal (){
+        Meal meal = new Meal();
+        meal.addItem(new ChickenBurger());
+        meal.addItem(new Pepsi());
+        return meal;
     }
 }

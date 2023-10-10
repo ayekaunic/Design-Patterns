@@ -1,15 +1,26 @@
-public class Meal {
-    private String burger;
-    private String drink;
-    private String fries;
+import java.util.ArrayList;
+import java.util.List;
 
-    public Meal(String burger, String drink, String fries) {
-        this.burger = burger;
-        this.drink = drink;
-        this.fries = fries;
+public class Meal {
+    private List<Item> items = new ArrayList<Item>();
+
+    public void addItem(Item item){
+        items.add(item);
     }
 
-    public void describe() {
-        System.out.println("\nBurger: " + burger + ", Drink: " + drink + ", Fries: " + fries + "\n");
+    public float getCost(){
+        float cost = 0.0f;
+        for (Item item : items) {
+           cost += item.price();
+        }		
+        return cost;
+    }
+
+    public void showItems(){
+        for (Item item : items) {
+           System.out.print("Item : "+item.name());
+           System.out.print(", Packing : "+item.packing().pack());
+           System.out.println(", Price : "+item.price());
+        }		
     }
 }
