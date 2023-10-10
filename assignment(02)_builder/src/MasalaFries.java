@@ -1,12 +1,13 @@
-public class VegBurger extends Burger {
+public class MasalaFries extends Fries {
     
     @Override
     public float price() {
-        return 25.0f;
+        return 50.0f;
     }
 
     @Override
     public String name() {
-        return "Veg Burger";
+        return "Masala Fries";
     }
+
 }
