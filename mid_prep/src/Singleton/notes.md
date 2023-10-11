@@ -26,3 +26,14 @@ Works fine in the case of the single-threaded environment, but when it comes to 
 ## Thread Safe Singleton
 A simple way to create a thread-safe singleton class is to make the global access method synchronized so that only one thread can execute this method at a time. Works fine and provides thread-safety, but it reduces the performance because of the cost associated with the synchronized method.
 To avoid this extra overhead every time, double-checked locking principle is used. In this approach, the synchronized block is used inside the if condition with an additional check to ensure that only one instance of a singleton class is created.
+
+## Pros
+- You can be sure that a class has only a single instance.
+- You gain a global access point to that instance.
+- The singleton object is initialized only when it’s requested for the first time.
+
+## Cons
+- The Singleton pattern can mask bad design, for instance, when the components of the program know too much about each other.
+- Violates the Single Responsibility Principle. The pattern solves two problems at the time.
+- The pattern requires special treatment in a multithreaded environment so that multiple threads won’t create a singleton object several times.
+- It may be difficult to unit test the client code of the Singleton.
