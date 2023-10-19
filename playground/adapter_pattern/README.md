@@ -1,18 +1,32 @@
-## Getting Started
+# Adapter Pattern
+- Allows objects with incompatible interfaces to collaborate.
+- It is a special object that converts the interface of one object so that another object can understand it.
+- An adapter wraps one of the objects to hide the complexity of conversion happening behind the scenes. The wrapped object isn’t even aware of the adapter. 
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+## How it works
+1. The adapter gets an interface, compatible with one of the existing objects.
+2. Using this interface, the existing object can safely call the adapter’s methods.
+3. Upon receiving a call, the adapter passes the request to the second object, but in a format and order that the second object expects.
 
-## Folder Structure
+Note: Sometimes it’s even possible to create a two-way adapter that can convert the calls in both directions.
 
-The workspace contains two folders by default, where:
+## Aplicability
+- Use the Adapter class when you want to use some existing class, but its interface isn’t compatible with the rest of your code.
+- Use the pattern when you want to reuse several existing subclasses that lack some common functionality that can’t be added to the superclass.
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+## How to implement
+1. Make sure that you have at least two classes with incompatible interfaces:
+    - A useful service class, which you can’t change (often 3rd-party, legacy or with lots of existing dependencies).
+    - One or several client classes that would benefit from using the service class.
+2. Declare the client interface and describe how clients communicate with the service.
+3. Create the adapter class and make it follow the client interface. Leave all the methods empty for now.
+4. Add a field to the adapter class to store a reference to the service object. The common practice is to initialize this field via the constructor, but sometimes it’s more convenient to pass it to the adapter when calling its methods.
+5. One by one, implement all methods of the client interface in the adapter class. The adapter should delegate most of the real work to the service object, handling only the interface or data format conversion.
+6. Clients should use the adapter via the client interface. This will let you change or extend the adapters without affecting the client code.
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+## Pros
+1. Single Responsibility Principle. You can separate the interface or data conversion code from the primary business logic of the program.
+2. Open/Closed Principle. You can introduce new types of adapters into the program without breaking the existing client code, as long as they work with the adapters through the client interface.
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+## Cons
+1. The overall complexity of the code increases because you need to introduce a set of new interfaces and classes. Sometimes it’s simpler just to change the service class so that it matches the rest of your code.
